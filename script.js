@@ -5,6 +5,28 @@ let input = "";
 
 buttons.forEach(button => button.addEventListener("click", sharedListener));
 
+document.addEventListener("keydown", keyboardListener);
+
+function keyboardListener(e) {
+  const pressedKey = e.key;
+  const numbers = "0123456789";
+  const operators = "-+*/";
+
+  if (pressedKey === "c") {
+    clearInput();
+  } else if (pressedKey === "Backspace") {
+    backspace();
+  } else if (numbers.includes(pressedKey)) {
+    numberInputHandler(pressedKey);
+  } else if (pressedKey === ".") {
+    periodInputHandler();
+  } else if (operators.includes(pressedKey)) {
+    operatorInputHandler(pressedKey);
+  } else if (pressedKey === "=") {
+    equalInputHandler();
+  }
+}
+
 function sharedListener(e) {
   const pressedButtonClass = e.target.className;
   const pressedButtonText = e.target.textContent;
